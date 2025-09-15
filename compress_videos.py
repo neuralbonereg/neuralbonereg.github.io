@@ -24,8 +24,8 @@ for dirpath, dirnames, filenames in os.walk(input_root):
                 "-crf", "35",
                 "-preset", "fast",
                 "-acodec", "aac",
-                "-b:v", "1M",
-                "-vf", "scale=-2:640",
+                "-b:v", "2M",
+                "-vf", "scale=-2:480",
                 output_path
             ]
 
