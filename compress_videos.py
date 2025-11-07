@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-input_root = "videos"             # root folder with videos and subfolders
+input_root = "videos_new"             # root folder with videos and subfolders
 output_root = "videos_compressed" # folder to save compressed videos
 
 # Walk through all directories and files
