@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Project Title</title>
+  <title>NeuralBoneReg</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
     body {
@@ -161,37 +161,42 @@
     <h1>NeuralBoneReg: A Novel Self-Supervised Method for Robust and Accurate Multi-Modal Bone Surface Registration</h1>
 
     <div class="authors">
-      Luohong Wu<sup>1</sup>, Matthias Seibold<sup>2</sup>, Nicola A. Cavalcanti<sup>1,3</sup>, Yunke Ao<sup>1,2</sup>, Roman Flepp<sup>1,2</sup>, Aidana Massalimova<sup>1,2</sup>, Lilian Calvet<sup>1,2</sup>, Philipp Fürnstahl<sup>1,2</sup>
+      Luohong Wu<sup>1</sup>, Matthias Seibold<sup>1</sup>, Nicola A. Cavalcanti<sup>1</sup>, Yunke Ao<sup>1,2</sup>, Roman Flepp<sup>1</sup>, Aidana Massalimova<sup>1</sup>, Lilian Calvet<sup>1</sup>, Philipp Fürnstahl<sup>1,2</sup>
     </div>
 
     <div class="affiliations">
       <sup>1</sup>Balgrist University Hospital·
       <sup>2</sup>ETH Zurich·
-      <sup>3</sup>OR-X
+
     </div>
 
     <div class="button-row">
       <a class="pill-btn" href="https://arxiv.org/abs/xxxx.xxxxx" target="_blank">arXiv</a>
-      <a class="pill-btn" href="https://github.com/your-repo" target="_blank"><i class="fab fa-github"></i> Code</a>
+      <!-- <a class="pill-btn" href="https://github.com/your-repo" target="_blank"><i class="fab fa-github"></i> Code</a> -->
     </div>
 
     <img src="teaser.svg" alt="NeuralBoneReg" width="95%" height="auto">
     <h2>Abstract</h2>
     <div class="abstract">
       <p>
-       <b>Background</b>: In computer-assisted orthopedic surgery (CAOS), patient-specific surgical plans, that are utilized to execute surgical procedures precisely and consistently, are mainly derived from preoperative medical imaging data. To provide effective surgical guidance, most CAOS systems require an accurate and often cross-modal registration between intraoperative and preoperative imaging data, where the inherent high symmetry of bone shapes introduces a large number of local minima during the registration process. Existing multimodal registration approaches rely either on manual or automatic but anatomy-specific registration methods. Therefore, robust and accurate methods for automatic, anatomy-agnostic multimodal registration of bone surfaces would have a high clinical impact.
+       <b>Background</b>: In computer- and robot-assisted orthopedic surgery (CAOS), patient-specific surgical plans are generated from preoperative medical imaging data to define target locations and implant trajectories. During surgery, these plans must be precisely transferred to the intraoperative setting to guide accurate execution. The accuracy and success of this transfer relies on cross-registration between preoperative and intraoperative data. However, the substantial heterogeneity across imaging modalities and devices renders this registration process challenging and error-prone, leading to inaccuracies. Consequently, more robust and accurate methods for automatic, modality-agnostic multimodal registration of bone surfaces would have a substantial clinical impact.
       </p>
       <p>
-         <b>Methods</b>: We propose NeuralBoneReg, a surface-based self-supervised pipeline tailored to multimodal bone surface registration in CAOS. NeuralBoneReg comprises an implicit neural unsigned distance field (UDF) module and a novel MLP-based registration module. The implicit neural UDF representation module learns a UDF from the bone model derived from preoperative imaging data. The registration module generates a set of transformation hypotheses to register a point cloud derived from the intraoperative imaging data with the preoperative imaging data based on our proposed registration loss. In contrast to traditional CPU-based optimizers, the registration module is designed for high parallelism and the efficient use of GPU resources. For each specimen, NeuralBoneReg operates in a self-supervised manner, without requiring any training data from other specimens or ground truth transformations. NeuralBoneReg and baseline methods are extensively evaluated on two publicly available datasets obtained from cadaveric experiments: a CT--ultrasound dataset of the fibula and tibia (UltraBones100k) and a CT--RGBD dataset of spinal vertebrae (SpineDepth). Furthermore, we evaluate the proposed method on a novel CT--ultrasound dataset of cadaveric specimens containing femur and pelvis (UltraBones-Hip) that will be made publicly available.
+         <b>Methods</b>: We propose NeuralBoneReg, a self-supervised, surface-based framework for bone surface registration using 3D point clouds as a modality-agnostic representation. NeuralBoneReg comprises two key components: an implicit neural unsigned distance field (UDF) module and a multilayer perceptron (MLP)-based registration module. The UDF module learns a neural representation of the preoperative bone model. The registration module solves both global initialization and local refinement by generating a set of transformation hypotheses to register the intraoperative point cloud with the preoperative neural UDF. Compared to state-of-the-art (SOTA) supervised registration, NeuralBoneReg operates in a self-supervised manner, without requiring inter-subject training data with ground truth transformations. We evaluated NeuralBoneReg against baseline methods on two publicly available multi-modal datasets: a CT--ultrasound dataset of the fibula and tibia (UltraBones100k) and a CT--RGB-D dataset of spinal vertebrae (SpineDepth). The evaluation also includes a newly introduced CT--ultrasound dataset of cadaveric subjects containing femur and pelvis (UltraBones-Hip), which will be made publicly available.
         </p>
         <p>
-        <b>Results</b>: Quantitative and qualitative results demonstrate the effectiveness of NeuralBoneReg. Specifically, NeuralBoneReg surpasses existing automatic methods, achieving a mean relative rotation error (RRE) of 1.63&deg and a mean relative translation error (RTE) of 1.85 mm on the UltraBones100k dataset; a mean RRE of 1.81&deg and a mean RTE of 1.87 mm on the UltraBones-Hip dataset; and a mean RRE of 3.03&deg and a mean RTE of 2.36 mm on the SpineDepth dataset. These results highlight the generalizability of NeuralBoneReg across different bone shapes and imaging modalities.
+        <b>Results</b>: Quantitative and qualitative results demonstrate the effectiveness of NeuralBoneReg, matching or surpassing existing methods across all datasets. It achieves a mean relative rotation error (RRE) of 1.68° and a mean relative translation error (RTE) of 1.86~mm on the UltraBones100k dataset; a mean RRE of 1.88° and a mean RTE of 1.89~mm on the UltraBones-Hip dataset; and a mean RRE of 3.79° and a mean RTE of 2.45~mm on the SpineDepth dataset. These results highlight the method's strong generalizability across different anatomies and imaging modalities.
       </p>
         <p>
-            <b>Conclusions</b>: The robust and accurate registration performance of NeuralBoneReg demonstrates its potential to advance downstream applications in CAOS.
+            <b>Conclusions</b>: NeuralBoneReg achieves robust, accurate, and modality-agnostic registration of bone surfaces, offering a promising solution for reliable cross-modal alignment in computer- and robot-assisted orthopedic surgery.
         </p>
     </div>
-
+    <h2>Code and dataset</h2>
+    <p>
+      Code and dataset will be available upon acceptance. For early access, please contact
+      <a href="mailto:Luohong.wu@balgrist.ch">Luohong.wu@balgrist.ch</a>.
+    </p>
+	
     <h2>Visualization of Results</h2>
     <h3>Dataset 1: SpineDepth</h3>
     <div class="abstract">
